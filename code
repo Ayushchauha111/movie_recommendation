@@ -1,0 +1,37 @@
+import numpy as np
+import pandas as pd
+df=pd.read_csv("movie_dataset.csv")
+features=["keywords","cast","genres","director"]
+def combined_features(row):
+try:
+  return row["keywords"]+" "+row["cast"]+" "+row["genres"]+" "+row["director"]
+except:
+  print ("error:",row)
+  
+ for a in featres:
+   df[a]=df[a].fillna(' ')
+   
+  df["combine_feature"]=df.apply(combined_features,axis=1)  
+  
+ from sklearn.feature_extraction.text import CountVectroizer
+ cv=CountVectroizer()
+ X=cv.fit_transform(df["combine_feature"])
+ 
+ from sklearn.metrices.pairwise import cosine_similarity
+ cs=cosine_similarity(X)
+ 
+ 
+ def get_title_from_index(index):
+     return df[df.index==index]["title"].values[0]
+ 
+ 
+ def get_index_from_title(title):
+     return df[df.title==title]["index"].values[0]      
+     
+     
+  movie_user_likes = "Avatar"   
+  movie_index=get_index_from_title(movie_user_likes)
+  similarmov=list(enumerate(cosinesim[movie_index]))
+  sorted_sim_mov=sorted(similarmov,key= lambda x:x[1],reverse=True)
+  for movie in sorted_sim_mov:
+	print (get_title_from_index(movie[0]))
